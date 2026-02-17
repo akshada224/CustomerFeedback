@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>View Feedback (Admin)</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Feedback Details</h2>
+
+        <div class="feedback-detail">
+            <p><strong>ID:</strong> <span th:text="${feedback.id}">1</span></p>
+            <p><strong>Date:</strong> <span th:text="${feedback.date}">2024-02-09</span></p>
+            <p><strong>User:</strong> <span th:text="${feedback.user.username}">User</span> (<span
+                    th:text="${feedback.user.email}">user@example.com</span>)</p>
+            <hr>
+            <p><strong>Message:</strong></p>
+            <div class="message-box"
+                style="background: #f9f9f9; padding: 15px; border-radius: 5px; white-space: pre-wrap;"
+                th:text="${feedback.message}">
+                Feedback message content...
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a th:href="@{/admin/feedback/edit/{id}(id=${feedback.id})}" class="btn">Edit</a>
+            <a th:href="@{/admin/feedback/delete/{id}(id=${feedback.id})}" class="btn btn-delete"
+                onclick="return confirm('Are you sure?')">Delete</a>
+            <a th:href="@{/admin/dashboard}" class="btn" style="background-color: rgb(0, 255, 255);">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container" style="max-width: 800px;">
+        <h2>Admin Feedback Dashboard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Feedback</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="fb : ${feedbacks}">
+                    <td th:text="${fb.id}">1</td>
+                    <td th:text="${fb.message}">Message</td>
+                    <td th:text="${fb.date}">2024-02-09</td>
+                    <td>
+                        <a th:href="@{/admin/feedback/view/{id}(id=${fb.id})}" class="btn-sm"
+                            style="background-color: #17a2b8;">View</a>
+                        <a th:href="@{/admin/feedback/edit/{id}(id=${fb.id})}" class="btn-sm">Edit</a>
+                        <a th:href="@{/admin/feedback/delete/{id}(id=${fb.id})}" class="btn-sm btn-delete">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="logout-container">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn-sm">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

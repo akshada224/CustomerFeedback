@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Feedback</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container" style="max-width: 800px;">
+        <h2>My Feedbacks</h2>
+
+        <!-- List of existing feedbacks -->
+        <div th:if="${not #lists.isEmpty(feedbacks)}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Message</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="fb : ${feedbacks}">
+                        <td th:text="${fb.date}">Date</td>
+                        <td th:text="${fb.message}">Message</td>
+                        <td>
+                            <a th:href="@{/feedback/edit/{id}(id=${fb.id})}" class="btn-sm">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:if="${#lists.isEmpty(feedbacks)}">
+            <p>No feedback submitted yet.</p>
+        </div>
+
+        <h3 style="margin-top: 30px;">Submit Feedback</h3>
+        <form th:action="@{/feedback}" th:object="${feedback}" method="post" class="form-group">
+            <input type="hidden" th:field="*{id}" />
+            <textarea th:field="*{message}" placeholder="Write your feedback here..." rows="5" required></textarea>
+            <button type="submit" class="btn"
+                th:text="${feedback.id} ? 'Update Feedback' : 'Submit Feedback'">Submit</button>
+        </form>
+
+        <div th:if="${param.success}" class="success">Feedback saved successfully!</div>
+
+        <div class="logout-container">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn-sm">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

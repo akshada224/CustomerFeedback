@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Edit Feedback (Admin)</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Edit Feedback</h2>
+
+        <form th:action="@{/admin/feedback/update}" th:object="${feedback}" method="post" class="form-group">
+            <input type="hidden" th:field="*{id}" />
+            <!-- Keep original user and date -->
+            <input type="hidden" th:field="*{user}" />
+            <input type="hidden" th:field="*{date}" />
+
+            <label>Feedback Message:</label>
+            <textarea th:field="*{message}" rows="5" required></textarea>
+
+            <button type="submit" class="btn">Update Feedback</button>
+        </form>
+
+        <div style="margin-top: 15px;">
+            <a th:href="@{/admin/dashboard}">Cancel</a>
+        </div>
+    </div>
+</body>
+
+</html>
